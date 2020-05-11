@@ -3,16 +3,17 @@ const ddb = new AWS.DynamoDB.DocumentClient();
 let ret = {};
 
 exports.handler = (event, context, callback) => {
-  const { channel_name, map_key, links } = JSON.parse(event.body);
+  const { channel_name, url, length } = JSON.parse(event.body);
   const params = {
     TableName: "channels",
     Key: { name: channel_name},
-    UpdateExpression : "SET programme.#map_key = :videos",
+    UpdateExpression : "SET backup_pool.#url = :lenth",
+    ConditionExpression : "attribute_not_exists(backup_pool.#url)",
     ExpressionAttributeNames : {
-        "#map_key": map_key
+        "#url": url
     },
     ExpressionAttributeValues : {
-        ":videos": links
+        ":lenth": length
     }
 
   }
