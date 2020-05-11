@@ -5,12 +5,12 @@ const crypto = require("crypto");
 const documentClient = new AWS.DynamoDB.DocumentClient();
 
 exports.handler = async event => {
-  const { category, name, description, email, thumbnail, mature } = JSON.parse(event.body)
+  const { category, name, description, userUUID, thumbnail, mature } = JSON.parse(event.body)
   const params = {
     TableName: "channels",
-    Item: { 
+    Item: {
       name: name,
-      email: email,
+      userUUID: userUUID,
       category: category,
       description: description,
       thumbnail: thumbnail,
