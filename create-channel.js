@@ -35,7 +35,8 @@ exports.handler = async event => {
           description: description,
           thumbnail: thumbnail,
           mature: mature,
-          programme: {}
+          programme: {},
+          backup_pool: {}
         }
       }
       try {
